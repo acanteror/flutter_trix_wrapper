@@ -1,0 +1,72 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>Trix</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="csp-nonce" content="topsecret">
+    <link rel="stylesheet" type="text/css" href="trix.css">
+    <script type="text/javascript" src="trix.js"></script>
+    
+    <script type="text/javascript">
+
+      document.addEventListener("DOMContentLoaded", function(event) {
+      
+        Trix.config.attachments.preview.caption.name = true;
+        Trix.config.attachments.preview.caption.size = false;
+        Trix.config.attachments.file.caption.size = false;
+
+        document.addEventListener("trix-attachment-add", function(event) {
+          var attachment = event.attachment;
+          if (attachment.file) {
+            attachment.setUploadProgress(100);
+            attachment.setAttributes({url: attachment.file.uri, 
+                                    mobile_id: attachment.file.uuid});
+          }
+        });
+
+        document.addEventListener("trix-attachment-remove", function(event){
+          const attachment = event.attachment;
+          if (attachment.file) {
+            RemoveAttachment.postMessage(attachment.file.fileUUID);
+          }
+        });
+    
+        document.getElementsByClassName("trix-button--icon-attach")[0].removeAttribute('data-trix-action');
+        document.getElementsByClassName("trix-button--icon-attach")[0].addEventListener("click", function() {
+          showBottomSheet();
+        });
+      });
+      
+
+      function insertFile(fileName, mime, uri, fileUUID) {
+        const file = new File([], fileName, { type: mime });
+        file['uri'] = uri;
+        file['uuid'] = fileUUID;
+        document.querySelector('trix-editor').editor.insertFile(file);
+      };
+
+      function getText() {
+        return document.querySelector('#text').value;
+      }
+
+      function setText(text) {
+        document.querySelector('trix-editor').editor.loadHTML(text);
+      }
+
+      function setPlaceholder(text) {
+        console.log('placeholder');
+        document.getElementsByTagName('trix-editor')[0].setAttribute('placeholder', text);
+      }
+
+      function showBottomSheet() {
+        window.flutter_inappwebview.callHandler('showBottomSheet');
+      }
+
+    </script>
+  </head>
+  <body>
+    <input id="text" type="hidden" name="content">
+    <trix-editor placeholder="Insert text" class="trix-content" input="text"></trix-editor>
+  </body>
+</html>
