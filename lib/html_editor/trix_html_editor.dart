@@ -2,6 +2,7 @@ import 'dart:async';
 import 'dart:convert';
 import 'dart:core';
 import 'dart:io';
+import 'package:flutter_trix_wrapper/bloc/attachment_cubit.dart';
 import 'package:get/get.dart';
 import 'package:mime/mime.dart';
 import 'package:path/path.dart' as p;
@@ -11,7 +12,6 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_inappwebview/flutter_inappwebview.dart';
-import 'package:flutter_trix_wrapper/bloc/attachment_bloc.dart';
 import 'package:flutter_trix_wrapper/html_editor/pick_image.dart';
 import 'package:flutter_trix_wrapper/path_resolver/path_resolver.dart';
 
@@ -141,7 +141,7 @@ class TrixHtmlEditorState extends State<TrixHtmlEditor> {
     file.readAsBytes().then((List<int> fileBytes) {
       String mime = lookupMimeType(file.path, headerBytes: fileBytes) ??
           'application/octet-stream';
-      String fileUUID = Get.find<AttachmentBloc>()
+      String fileUUID = Get.find<AttachmentCubit>()
           .putFile(toMultipart(fileName, fileBytes, mime));
       String insertObject =
           "insertFile('$fileName', '$mime', '${getPath(file, fileBytes, mime)}', '$fileUUID')";
