@@ -8,10 +8,7 @@ Webview with inapp_webview
 
 
 Next tasks
-- attachmentbloc to cubit NK
-- test on devices working
 - add cubit tests NK
-- b64 both platforms (just for painting html)
 
 ## Getting Started
 
