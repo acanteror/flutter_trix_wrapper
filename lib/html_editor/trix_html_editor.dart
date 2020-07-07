@@ -158,7 +158,7 @@ class TrixHtmlEditorState extends State<TrixHtmlEditor> {
   }
 
   String getPath(File file, List<int> fileBytes, String mime) {
-    if (Platform.isIOS && mime.contains(RegExp(r'(?:jpe?g|png|gif)'))) {
+    if (/*Platform.isIOS && */ mime.contains(RegExp(r'(?:jpe?g|png|gif)'))) {
       return 'data:$mime;base64,${base64Encode(fileBytes)}';
     } else {
       return file.uri.toString();
