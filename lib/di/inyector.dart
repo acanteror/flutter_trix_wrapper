@@ -1,7 +1,7 @@
 import 'dart:io';
 
 import 'package:flutter_inappwebview/flutter_inappwebview.dart';
-import 'package:flutter_trix_wrapper/bloc/attachment_bloc.dart';
+import 'package:flutter_trix_wrapper/bloc/attachment_cubit.dart';
 import 'package:flutter_trix_wrapper/bloc/trix_cubit.dart';
 import 'package:flutter_trix_wrapper/config/app_config.dart';
 import 'package:flutter_trix_wrapper/path_resolver/android_path_resolver.dart';
@@ -20,5 +20,5 @@ configInyector() {
   }
 
   Get.lazyPut<TrixCubit>(() => TrixCubit());
-  Get.lazyPut<AttachmentBloc>(() => AttachmentBloc());
+  Get.lazyPut<AttachmentCubit>(() => AttachmentCubit());
 }
