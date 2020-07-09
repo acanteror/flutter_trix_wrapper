@@ -2,12 +2,12 @@
 
 Flutter Trix Wrapper Example (Work in progress)
 
-State management with Cubit
-DI and navigation with Getx
-Webview with inapp_webview
+- State management: [flutter_cubit](https://pub.dev/packages/flutter_cubit)
+- DI and navigation: [getx](https://pub.dev/packages/get)
+- Webview: [flutter_inappwebview](https://pub.dev/packages/flutter_inappwebview)
 
 
-Next tasks
+TODO:
 - add cubit tests NK
 
 ## Getting Started
