@@ -9,14 +9,14 @@ import 'package:flutter_trix_wrapper/path_resolver/path_resolver.dart';
 import 'package:flutter_trix_wrapper/path_resolver/server_path_resolver.dart';
 import 'package:get/get.dart';
 
-configInyector() {
+inyection() {
   if (Platform.isAndroid) {
-    Get.lazyPut<PathResolver>(() => AndroidPathResolver());
+    Get.put<PathResolver>(AndroidPathResolver());
   }
   if (Platform.isIOS) {
-    Get.lazyPut<InAppLocalhostServer>(
-        () => InAppLocalhostServer(port: AppConfig.PORT));
-    Get.lazyPut<PathResolver>(() => ServerPathResolver());
+    Get.put<InAppLocalhostServer>(InAppLocalhostServer(port: AppConfig.PORT))
+        .start();
+    Get.put<PathResolver>(ServerPathResolver());
   }
 
   Get.lazyPut<TrixCubit>(() => TrixCubit());
